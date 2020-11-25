@@ -17,9 +17,9 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.countUp}>Count Up</button>
-        <div>{this.state.counter}</div>
+      <div className="container text-center mt-5">
+        <div className="mt-3">{this.state.counter}</div>
+        <button className="btn btn-primary" onClick={this.countUp}>Count Up</button>
       </div>
     )
   }
