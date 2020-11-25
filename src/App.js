@@ -7,11 +7,15 @@ export default class App extends Component {
     this.state = {
       counter: 0
     }
+
+    // solve this context issue
+    this.countUp = this.countUp.bind(this);
   }
 
-  countUp = () => {
+  // method - must bind this context inside constructor to solve this context issue
+  countUp() {
     this.setState({
-      counter: ++this.state.counter
+      counter: this.state.counter + 1
     })
   }
 
