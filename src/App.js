@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Button from "./Button";
+import { UseLayoutEffectEx } from "./UseLayoutEffectEx";
 
 export default function App() {
   const [counter, setCounter] = useState(0);
@@ -7,7 +8,11 @@ export default function App() {
   const amountRef = useRef();
   // const reachMaxRef = useRef(false);
 
-  const listofCounts = [1, 10, 20, 40, 50];
+  // const [listofCounts, setListofCounts] = useState([1]);
+  const listofCounts = [1];
+
+  const divRef = useRef();
+  const [divData, setDivData] = useState({});
 
   // method - must bind this context inside constructor to solve this context issue
   // function countUp() {
@@ -45,16 +50,36 @@ export default function App() {
 
   const onClick = useCallback((n) => setCounter((c) => c + n), [setCounter]);
 
+  useEffect(() => {
+    setDivData(divRef.current.getBoundingClientRect());
+  }, []);
+
+  const handleAddBtns = () => {
+    // setListofCounts(...listofCounts, 10)
+    listofCounts.push(10);
+  };
+
   return (
-    <div className="container text-center mt-5">
+    <div ref={divRef} className="container text-center mt-5">
       <input ref={amountRef} />
       <div className="mt-3">{counter}</div>
+      <Button
+        onClick={handleAddBtns}
+        key={listofCounts[listofCounts.length - 1]}
+        label="Add Buttons"
+      />
+      <br />
       {listofCounts.map((count) => (
-        <Button countUp={onClick} label={count} key={count} n={count} />
+        <>
+          <Button onClick={onClick} label={count} key={count} n={count} />
+          <br />
+        </>
       ))}
       <button className="btn btn-success mx-2 mt-3" onClick={changeTitle}>
         Change Title
       </button>
+      {/* <pre className="text-left">{JSON.stringify(divData, null, 2)}</pre> */}
+      <UseLayoutEffectEx />
     </div>
   );
 }

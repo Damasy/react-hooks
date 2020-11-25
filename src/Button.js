@@ -4,7 +4,7 @@ const Button = (props) => {
   const renderRef = useRef(0);
   console.log(renderRef.current++)
   return (
-  <button className="btn btn-primary mx-2 mt-3" onClick={() => props.countUp(props.n)}>{props.label}</button>
+  <button className="btn btn-primary mx-2 mt-3" onClick={() => props.onClick(props.n)}>{props.label}</button>
   )
 }
 
