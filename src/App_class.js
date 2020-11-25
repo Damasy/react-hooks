@@ -9,6 +9,8 @@ export default class App extends Component {
       title: ''
     }
 
+    this.amount = React.createRef()
+
     // solve this context issue
     this.countUp = this.countUp.bind(this);
     this.changeTitle = this.changeTitle.bind(this);
@@ -16,6 +18,8 @@ export default class App extends Component {
 
   componentDidMount() {
     console.log('mounted')
+    console.log(this.amount.current)
+    this.amount.current.focus()
   }
 
   componentDidUpdate() {
@@ -40,9 +44,10 @@ export default class App extends Component {
   render() {
     return (
       <div className="container text-center mt-5">
+        <input ref={this.amount} />
         <div className="mt-3">{this.state.counter}</div>
-        <button className="btn btn-primary" onClick={this.countUp}>Count Up</button>
-        <button className="btn btn-primary" onClick={this.changeTitle}>Change Title</button>
+        <button className="btn btn-primary mx-2 mt-3" onClick={this.countUp}>Count Up</button>
+        <button className="btn btn-success mx-2 mt-3" onClick={this.changeTitle}>Change Title</button>
       </div>
     )
   }
